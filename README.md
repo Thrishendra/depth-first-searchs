@@ -1,6 +1,6 @@
 <h1>ExpNo 2 : Implement Depth First Search Traversal of a Graph</h1> 
-<h3>Name: </h3>
-<h3>Register Number:     </h3>
+<h3>Name: Tella Thrishendra</h3>
+<h3>Register Number: 212223230227 </h3>
 <H3>Aim:</H3>
 <p> To Implement Depth First Search Traversal of a Graph using Python 3.</p>
 <h3>Theory:</h3>
@@ -54,8 +54,46 @@ Now, the Stack becomes empty, which means we have visited all the nodes, and our
  <li>If Not Visited, add it to the STACK. Else Call The Function Again Until No more nodes needs to be visited.</li>
 </ol></B>
 
-<hr>
-<h3>Sample Input</h3>
+# Program:
+```
+from collections import defaultdict
+import networkx as nx
+import matplotlib.pyplot as plt
+
+graph=defaultdict(list)
+G=nx.Graph()
+nodes,edges=map(int,input().split())
+for i in range(edges):
+    u,v=map(str,input().split())
+    graph[u].append(v)
+    graph[v].append(u)
+    G.add_edge(u,v)
+nx.draw(G, with_labels=True, node_color="lightblue", edge_color="red", width=2, node_size=2000)
+plt.show()
+print(graph)
+
+#Depth First Search
+def dfs(graph, start, visited, path):
+    path.append(start)
+    visited[start] = True
+
+    for neighbour in graph[start]:
+        if not visited[neighbour]:
+            dfs(graph, neighbour, visited, path)
+
+    return path
+
+# input start node
+start = input()
+
+path = []
+visited = defaultdict(bool)
+
+traversepath = dfs(graph, start, visited, path)
+print("Depth First Search:")
+print(traversepath)
+```
+# Sample Input:
 <hr>
 8 9 <BR>
 A B <BR>
@@ -67,14 +105,17 @@ C G <BR>
 D F <BR>
 G F <BR>
 F H <BR>
-<hr>
-<h3>Sample Output</h3>
-<hr>
+
+# Output:
+
+<img width="1447" height="533" alt="image" src="https://github.com/user-attachments/assets/465191a8-19df-4c40-8664-ce1d7360ac0c" />
+
+Depth First Search:
+
 ['A', 'B', 'E', 'D', 'C', 'G', 'F', 'H']
 
-<hr>
 
-<hr>
+
 <h3>Sample Input</h3>
 <hr>
 5 5 <BR>
@@ -85,8 +126,16 @@ F H <BR>
 2 4 <BR>
 <hr>
 <h3>Sample Output</h3>
-<hr>
+
+<img width="1253" height="653" alt="image" src="https://github.com/user-attachments/assets/91d2675d-0f27-436e-9143-fbf063c378bc" />
+
+
+```
+0
+Depth First Search:
 ['0', '1', '2', '3', '4']
+```
+
 
 <hr>
 <h3>Result:</h3>
